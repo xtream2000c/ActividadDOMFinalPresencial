@@ -77,10 +77,27 @@ function main() {
         for (var j = 0; j < columnas; j++) {
             
             var celda = fila.insertCell();
-            celda.style.border="1px solid black"
-
+            celda.style.border="1px solid black";
             celda.style.width="10px";
             celda.style.height="10px";
+            pintar();
+            celda.addEventListener("click", function(){
+                this.className=colorActual;
+
+                if (pincelActivo) {
+                    pincelActivo = false; 
+                    pintar();
+                }else{
+                    pincelActivo = true;
+                    pintar();
+                }
+                
+            });
+            celda.addEventListener("mouseover", function(){
+                if (pincelActivo) {
+                    this.className=colorActual;
+                }           
+            });
             
             celda.id="";
             celda.className="color6";
@@ -88,34 +105,12 @@ function main() {
         }
     }
 
-
-    tabla.addEventListener("click", function(){
-        if (pincelActivo) {
-            
-            pincelActivo = false;
-            
-        }else{
-            pincelActivo = true;
-        }
-        pintar();
-    })
-
-
 }
 
 function pintar(){
 
     if (pincelActivo) {
         pincel.innerText = "Picel activo, ahora puedes pintar";
-        
-        celdas = tabla.getElementsByTagName("td");
-        
-        for(var i = 0; i < celdas.length; i++) {
-            celdas[i].addEventListener("mouseover", function(){
-                this.className=colorActual;
-            });
-        }
-
     }else{
         pincel.innerText = "Picel desactivado, ahora no puedes pintar";
     }
