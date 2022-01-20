@@ -9,9 +9,11 @@ var pincelActivo = false;
 var celdas;
 var paletaColores;
 var celdaColores;
+var lineaColores;
 var clases;
 var colorActual = "color1";
-
+var limpiar;
+var limpiaCeldas;
 function main() {
 
     //Apartado selector de color
@@ -19,7 +21,23 @@ function main() {
     pincel = document.getElementById("pincel");
 
     paletaColores = document.getElementById("paleta");
-    celdaColores = paletaColores.getElementsByTagName("td");
+    lineaColores = paletaColores.getElementsByTagName("tr")[0];
+
+    colorNuevo1 = document.createElement("td");
+    colorNuevo2 = document.createElement("td");
+    colorNuevo3 = document.createElement("td");
+
+    lineaColores.appendChild(colorNuevo1);
+    lineaColores.appendChild(colorNuevo2);
+    lineaColores.appendChild(colorNuevo3);
+
+    colorNuevo1.className = "color7";
+    colorNuevo2.className = "color8";
+    colorNuevo3.className = "color9";
+
+    pincel.colSpan="9";
+
+    celdaColores = lineaColores.getElementsByTagName('td');
     for (let index = 0; index < celdaColores.length; index++) {
 
         celdaColores[index].addEventListener("click", function () {
@@ -78,6 +96,24 @@ function main() {
 
         }
     }
+
+    //Mejora boton limpiar
+
+    limpiar = document.createElement("button");
+    zonaDibujo.appendChild(limpiar);
+    limpiar.innerHTML="Limpiar el lienzo";
+    limpiar.style.marginTop="30px";
+
+    limpiar.addEventListener("click", function () {
+        limpiaCeldas = tabla.getElementsByTagName("td");
+        for (let iLimpieza = 0; iLimpieza < limpiaCeldas.length; iLimpieza++) {
+           
+            limpiaCeldas[iLimpieza].className="color6";
+
+        }
+        
+        alert(limpiaCeldas)
+    });
 
 }
 
