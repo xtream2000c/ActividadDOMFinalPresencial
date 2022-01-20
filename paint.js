@@ -4,8 +4,59 @@ var filas = 30;
 var columnas = 30;
 var zonaDibujo;
 var tabla;
+var paletaColor;
+var color1;
+var color2;
+var color3;
+var color4;
+var color5;
+var color6;
+var colorActual = "";
+var celdaActiva;
 
 function main() {
+
+    paletaColor = document.getElementById("paleta");
+
+    color1 = paletaColor.getElementsByClassName("color1");
+    color2 = paletaColor.getElementsByClassName("color2");
+    color3 = paletaColor.getElementsByClassName("color3");
+    color4 = paletaColor.getElementsByClassName("color4");
+    color5 = paletaColor.getElementsByClassName("color5");
+    color6 = paletaColor.getElementsByClassName("color6");
+    celdaActiva = color1;
+    color1[0].addEventListener("click", function() {
+        colorActual = color1[0].className;
+        celdaActiva=color1;
+        activo();
+    });
+    color2[0].addEventListener("click", function() {
+        colorActual = color2[0].className;
+        celdaActiva=color2;
+        activo();
+    });
+    color3[0].addEventListener("click", function() {
+        colorActual = color3[0].className;
+        celdaActiva=color3;
+        activo();
+    });
+    color4[0].addEventListener("click", function() {
+        colorActual = color4[0].className;
+        celdaActiva=color4;
+        activo();
+    });
+    color5[0].addEventListener("click", function() {
+        colorActual = color5[0].className;
+        celdaActiva=color5;
+        activo();
+    });
+    color6[0].addEventListener("click", function() {
+        colorActual = color6[0].className;
+        celdaActiva=color6;
+        activo();
+    });
+
+    //Pintar tabla vacia
 
     zonaDibujo = document.getElementById("zonadibujo");
     tabla = document.createElement("table");
@@ -25,10 +76,30 @@ function main() {
             celda.style.height="10px";
 
             celda.id="";
-            celda.className="";
+            celda.className="celda";
+
+
             
         }
     }
 
 
+}
+
+//Cambia el color activo
+
+function activo() {
+
+    color1[0].className="color1";
+    color2[0].className="color2";
+    color3[0].className="color3";
+    color4[0].className="color4";
+    color5[0].className="color5";
+    color6[0].className="color6";
+
+    celdaActiva[0].className = colorActual + " seleccionado";
+}
+
+function funciona() {
+    alert("Esto funciona");
 }
