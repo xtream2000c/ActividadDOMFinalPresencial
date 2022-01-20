@@ -112,7 +112,6 @@ function main() {
 
         }
         
-        alert(limpiaCeldas)
     });
 
 }
