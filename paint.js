@@ -11,10 +11,17 @@ var color3;
 var color4;
 var color5;
 var color6;
-var colorActual = "";
+var colorActual = "color1";
 var celdaActiva;
+var pincel;
+var pincelActivo = false;
+var celdas;
 
 function main() {
+
+    //Apartado selector de color
+
+    pincel = document.getElementById("pincel");
 
     paletaColor = document.getElementById("paleta");
 
@@ -26,37 +33,37 @@ function main() {
     color6 = paletaColor.getElementsByClassName("color6");
     celdaActiva = color1;
     color1[0].addEventListener("click", function() {
-        colorActual = color1[0].className;
+        colorActual = "color1";
         celdaActiva=color1;
         activo();
     });
     color2[0].addEventListener("click", function() {
-        colorActual = color2[0].className;
+        colorActual = "color2";
         celdaActiva=color2;
         activo();
     });
     color3[0].addEventListener("click", function() {
-        colorActual = color3[0].className;
+        colorActual = "color3";
         celdaActiva=color3;
         activo();
     });
     color4[0].addEventListener("click", function() {
-        colorActual = color4[0].className;
+        colorActual = "color4";
         celdaActiva=color4;
         activo();
     });
     color5[0].addEventListener("click", function() {
-        colorActual = color5[0].className;
+        colorActual = "color5";
         celdaActiva=color5;
         activo();
     });
     color6[0].addEventListener("click", function() {
-        colorActual = color6[0].className;
+        colorActual = "color6";
         celdaActiva=color6;
         activo();
     });
 
-    //Pintar tabla vacia
+    //Apartado Tabla
 
     zonaDibujo = document.getElementById("zonadibujo");
     tabla = document.createElement("table");
@@ -74,19 +81,48 @@ function main() {
 
             celda.style.width="10px";
             celda.style.height="10px";
-
-            celda.id="";
-            celda.className="celda";
-
-
             
+            celda.id="";
+            celda.className="color6";
+
         }
     }
 
 
+    tabla.addEventListener("click", function(){
+        if (pincelActivo) {
+            
+            pincelActivo = false;
+            
+        }else{
+            pincelActivo = true;
+        }
+        pintar();
+    })
+
+
 }
 
-//Cambia el color activo
+function pintar(){
+
+    if (pincelActivo) {
+        pincel.innerText = "Picel activo, ahora puedes pintar";
+        
+        celdas = tabla.getElementsByTagName("td");
+        
+        for(var i = 0; i < celdas.length; i++) {
+            celdas[i].addEventListener("mouseover", function(){
+                this.className=colorActual;
+            });
+        }
+
+    }else{
+        pincel.innerText = "Picel desactivado, ahora no puedes pintar";
+    }
+
+}
+
+//Cambia el color activo del selector de color
 
 function activo() {
 
@@ -99,6 +135,8 @@ function activo() {
 
     celdaActiva[0].className = colorActual + " seleccionado";
 }
+
+//Funcion para comprobar que funciona Se emplea como metodo de depuracion mientras se escribe el codigo
 
 function funciona() {
     alert("Esto funciona");
